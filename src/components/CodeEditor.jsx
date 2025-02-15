@@ -27,23 +27,19 @@ export default function CodeEditor() {
     const logs = [];
 
     try {
-      // Override console.log to capture output
       console.log = (...args) => {
         logs.push(args.map(arg => 
           typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
         ).join(' '));
       };
 
-      // Create a new Function from the code and execute it
       const func = new Function(code);
       func();
 
-      // Set the captured output
       setOutput(logs.join('\n'));
     } catch (error) {
       setOutput(`Error: ${error.message}`);
     } finally {
-      // Restore the original console.log
       console.log = consoleLog;
     }
   }, [code]);

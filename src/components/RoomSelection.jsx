@@ -1,17 +1,23 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRoom } from '../context/RoomContext';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRoom } from "../context/RoomContext";
 
 export default function RoomSelection() {
   const navigate = useNavigate();
   const { username, setRoomId } = useRoom();
-  const [inputRoomId, setInputRoomId] = useState('');
+  const [roomId, setRoomIdInput] = useState("");
+
+  useEffect(() => {
+    if (!username) {
+      navigate("/");
+    }
+  }, [username, navigate]);
 
   const handleJoinRoom = (e) => {
     e.preventDefault();
-    if (inputRoomId.trim()) {
-      setRoomId(inputRoomId);
-      navigate(`/room/${inputRoomId}`);
+    if (roomId.trim()) {
+      setRoomId(roomId);
+      navigate(`/room/${roomId}`);
     }
   };
 
@@ -21,25 +27,21 @@ export default function RoomSelection() {
     navigate(`/room/${newRoomId}`);
   };
 
-  if (!username) {
-    navigate('/');
-    return null;
-  }
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h1 className="text-2xl font-bold mb-6 text-center">Join or Create Room</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">Join or Create a Room</h1>
+
         <form onSubmit={handleJoinRoom} className="space-y-4">
           <div>
             <label htmlFor="roomId" className="block text-sm font-medium text-gray-700">
-              Room ID
+              Enter Room ID
             </label>
             <input
               type="text"
               id="roomId"
-              value={inputRoomId}
-              onChange={(e) => setInputRoomId(e.target.value)}
+              value={roomId}
+              onChange={(e) => setRoomIdInput(e.target.value)}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               placeholder="Enter Room ID"
             />
@@ -51,6 +53,7 @@ export default function RoomSelection() {
             Join Room
           </button>
         </form>
+
         <div className="mt-4">
           <button
             onClick={handleCreateRoom}

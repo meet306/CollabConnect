@@ -6,6 +6,7 @@ export default function AIChat() {
   const [message, setMessage] = useState('');
   const { messages, addMessage } = useRoom();
   const [isLoading, setIsLoading] = useState(false);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
