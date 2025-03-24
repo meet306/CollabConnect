@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const genAI = new GoogleGenerativeAI('AIzaSyAcme-eO5_z0GK7w49YVsKFPfC5PoUS5uw');
+const genAI = new GoogleGenerativeAI('AIzaSyDv5Gtc2_pC3gKHF7-aAUG2p2oi1iCZLds');
 
 export async function chat(message) {
   try {
