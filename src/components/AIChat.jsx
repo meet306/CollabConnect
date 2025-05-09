@@ -16,7 +16,7 @@ export default function AIChat() {
       setIsLoading(true);
       const userMessage = { role: 'user', content: message };
       addMessage(userMessage);
-
+      
       const response = await chat(message);
       addMessage({ role: 'assistant', content: response });
       setMessage('');

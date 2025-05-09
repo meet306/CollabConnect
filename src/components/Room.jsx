@@ -40,8 +40,8 @@ export default function Room() {
           }
         }
 
-        const appID = 638559391;
-        const serverSecret = '7f276ab94662b500eeaac00f7c24a4ef';
+        const appID = 29159156;
+        const serverSecret = 'e4002e641f0f3295f9575dcbc056e210';
         const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
           appID,
           serverSecret,
